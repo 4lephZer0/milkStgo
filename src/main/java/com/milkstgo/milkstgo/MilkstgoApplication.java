@@ -1,13 +1,13 @@
-package com.milkStgo.milkStgo;
+package com.milkstgo.milkstgo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MilkStgoApplication {
+public class MilkstgoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MilkStgoApplication.class, args);
+		SpringApplication.run(MilkstgoApplication.class, args);
 	}
 
 }

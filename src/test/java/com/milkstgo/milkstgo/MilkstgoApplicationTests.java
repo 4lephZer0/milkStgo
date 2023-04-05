@@ -1,10 +1,10 @@
-package milkStgo.milkStgo;
+package com.milkstgo.milkstgo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MilkStgoApplicationTests {
+class MilkstgoApplicationTests {
 
 	@Test
 	void contextLoads() {
