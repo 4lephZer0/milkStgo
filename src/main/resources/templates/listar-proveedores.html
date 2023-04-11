@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang = "es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mi sitio web</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter&display=swap">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+</head>
+<body>
+<header>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <a href="/"><img src="logo.png" alt="Logo de mi sitio web"/></a>
+            </div>
+            <ul class="navbar-menu">
+                <li class="navbar-menu-item"><a href="#">Ver Proveedores</a></li>
+                <li class="navbar-menu-item"><a href="#">Añadir Proveedores</a></li>
+                <li class="navbar-menu-item"><a href="#">Importar Acopio</a></li>
+                <li class="navbar-menu-item"><a href="#">Importar Grasas</a></li>
+                <li class="navbar-menu-item"><a href="#">Planilla de pago</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div th:align = "center" class="relative overflow-x-auto">
+        <h1 class="titulo">Listado de proveedores</h1>
+        <table class="w-3/4 text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="font-inter text-lg text-center text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">Codigo</th>
+                <th scope="col" class="px-6 py-3">Nombre</th>
+                <th scope="col" class="px-6 py-3">Categoria</th>
+                <th scope="col" class="px-6 py-3">Retencion</th>
+            </tr>
+            </thead>
+            <tbody >
+            <tr class="font-inter text-lg text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700" th:each="proveedores:${proveedores}">
+                <td class="px-6 py-4" th:text="${proveedores.codigo}"></td>
+                <td class="px-6 py-4" th:text="${proveedores.nombre}"></td>
+                <td class="px-6 py-4" th:text="${proveedores.categoria}"></td>
+                <td class="px-6 py-4" th:text="${proveedores.afecto}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</header>
+
+<main>
+</main>
+</body>
+</html>

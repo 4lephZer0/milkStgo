@@ -3,7 +3,6 @@ package com.milkstgo.milkstgo.controllers;
 import com.milkstgo.milkstgo.entities.ProveedorEntity;
 import com.milkstgo.milkstgo.services.ProveedorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -22,17 +21,17 @@ public class ProveedorController {
     public String listar(Model model){
         ArrayList<ProveedorEntity> proveedores = proveedorService.traerProveedores();
         model.addAttribute("proveedores", proveedores);
-        return "index";
+        return "listar-proveedores";
     }
 
-    @PutMapping("/ingresar-proveedor")
-    public String ingresarProveedor(@RequestParam("codigo") int codigo,
-                                    @RequestParam("nombre") String nombre,
-                                    @RequestParam("categoria") String categoria,
-                                    @RequestParam("afecto") String afecto){
+    //@PutMapping("/ingresar-proveedor")
+    //public String ingresarProveedor(@RequestParam("codigo") int codigo,
+                                    //@RequestParam("nombre") String nombre,
+                                    //@RequestParam("categoria") String categoria,
+                                    //@RequestParam("afecto") String afecto){
 
-        proveedorService.crearProveedor(codigo, nombre, categoria, afecto);
+       // proveedorService.crearProveedor(codigo, nombre, categoria, afecto);
 
-        return "index";
-    }
+        //return "index";
+    //}
 }
