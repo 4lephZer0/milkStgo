@@ -28,7 +28,7 @@
     <div th:align = "center" class="relative overflow-x-auto">
         <h1 class="titulo">Listado de proveedores</h1>
         <table class="w-3/4 text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="font-inter text-lg text-center text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <thead class="font-inter text-lg text-center text-white bg-purple-900 dark:bg-purple-900 dark:text-white">
             <tr>
                 <th scope="col" class="px-6 py-3">Codigo</th>
                 <th scope="col" class="px-6 py-3">Nombre</th>
@@ -37,7 +37,7 @@
             </tr>
             </thead>
             <tbody >
-            <tr class="font-inter text-lg text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700" th:each="proveedores:${proveedores}">
+            <tr class="font-inter font-medium text-lg text-center bg-orange-400 text-black dark:bg-orange-400 dark:text-black" th:each="proveedores:${proveedores}">
                 <td class="px-6 py-4" th:text="${proveedores.codigo}"></td>
                 <td class="px-6 py-4" th:text="${proveedores.nombre}"></td>
                 <td class="px-6 py-4" th:text="${proveedores.categoria}"></td>
