@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 @Controller
 @RequestMapping
+
 public class ProveedorController {
 
     @Autowired
@@ -24,14 +25,18 @@ public class ProveedorController {
         return "listar-proveedores";
     }
 
-    //@PutMapping("/ingresar-proveedor")
-    //public String ingresarProveedor(@RequestParam("codigo") int codigo,
-                                    //@RequestParam("nombre") String nombre,
-                                    //@RequestParam("categoria") String categoria,
-                                    //@RequestParam("afecto") String afecto){
+    @GetMapping("/ingresar-proveedor")
+    public String proveedor(){
+        return "ingresar-proveedor";
+    }
+    @PostMapping("/ingresar-proveedor")
+    public String ingresarProveedor(@RequestParam("codigo") String codigo,
+                                    @RequestParam("nombre") String nombre,
+                                    @RequestParam("categoria") String categoria,
+                                    @RequestParam("afecto") String afecto){
 
-       // proveedorService.crearProveedor(codigo, nombre, categoria, afecto);
+       proveedorService.crearProveedor(codigo, nombre, categoria, afecto);
 
-        //return "index";
-    //}
+        return "redirect:/ingresar-proveedor";
+    }
 }

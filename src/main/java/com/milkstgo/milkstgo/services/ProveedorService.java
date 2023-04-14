@@ -13,7 +13,8 @@ public class ProveedorService {
     @Autowired
     ProveedorRepository proveedorRepository;
 
-    public void crearProveedor(int codigo, String nombre, String categoria, String afecto){
+    public void crearProveedor(String codigo, String nombre, String categoria, String afecto){
+
         ProveedorEntity proveedorEntity = new ProveedorEntity();
         proveedorEntity.setCodigo(codigo);
         proveedorEntity.setNombre(nombre);
