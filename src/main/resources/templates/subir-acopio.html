@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang = "es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -21,13 +20,13 @@
             <div class="hidden w-full md:block md:w-auto" id="navbar-default">
                 <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-indigo-950 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-indigo-950 md:dark:bg-indigo-950 dark:border-gray-700">
                     <li>
-                        <a href="#" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Ver Proveedores</a>
+                        <a href="/listar-proveedores" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Ver Proveedores</a>
                     </li>
                     <li>
                         <a href="/ingresar-proveedor" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Añadir Proveedores</a>
                     </li>
                     <li>
-                        <a href="/subir-acopio" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Subir Acopio</a>
+                        <a href="#" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Subir Acopio</a>
                     </li>
                     <li>
                         <a href="/subir-grasas" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Subir Grasas</a>
@@ -40,29 +39,18 @@
         </div>
     </nav>
 </header>
-
 <main>
-    <div th:align = "center" class="relative overflow-x-auto">
-        <table class="w-3/4 text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="font-inter text-lg text-center text-white bg-indigo-950 dark:bg-indigo-950 dark:text-white">
-            <tr>
-                <th scope="col" class="px-6 py-3">Codigo</th>
-                <th scope="col" class="px-6 py-3">Nombre</th>
-                <th scope="col" class="px-6 py-3">Categoria</th>
-                <th scope="col" class="px-6 py-3">Retencion</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr class="font-inter font-medium text-lg text-center bg-gray-500 dark:bg-gray-500 text-black dark:text-black rounded-bl-xl rounded-br-xl" th:each="proveedores:${proveedores}">
-                <td class="px-6 py-4" th:text="${proveedores.codigo}"></td>
-                <td class="px-6 py-4" th:text="${proveedores.nombre}"></td>
-                <td class="px-6 py-4" th:text="${proveedores.categoria}"></td>
-                <td class="px-6 py-4" th:text="${proveedores.afecto}"></td>
-            </tr>
-            </tbody>
-        </table>
+    <div class="relative mx-auto mt-7 w-1/2 bg-gray-500 dark:bg-gray-500 rounded-xl border-gray-200">
+        <label class="block text-center pt-2 text-sm font-bold text-gray-800 dark:text-gray-800">Cargar el archivo de datos</label>
+        <form th:action="@{/subir-acopio}" method="POST" enctype="multipart/form-data">
+            <br>
+            <input class="block mx-auto w-3/4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file" id="file_input" name="file" accept = ".csv">
+            <br>
+            <button type="submit" value="Cargar el archivo a la Base de Datos" class="block mx-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Cargar el archivo a la Base de Datos</button>
+        </form>
+        <br>
     </div>
-
+    <h1 th:text="${mensaje}" class="block text-center pt-2 text-bold text-xl"></h1>
 </main>
 </body>
 </html>
