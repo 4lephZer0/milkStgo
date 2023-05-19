@@ -1,6 +1,5 @@
 package com.milkstgo.milkstgo.services;
 
-import com.milkstgo.milkstgo.entities.SubirAcopioEntity;
 import com.milkstgo.milkstgo.entities.SubirGrasasEntity;
 import com.milkstgo.milkstgo.repositories.SubirGrasasRepository;
 import lombok.Generated;
@@ -72,6 +71,7 @@ public class SubirGrasasService {
                 }
             }
             texto = temp;
+
             System.out.println("Archivo leido exitosamente");
         }catch(Exception e){
             System.err.println("No se encontro el archivo");

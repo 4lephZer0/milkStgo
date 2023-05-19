@@ -1,10 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang = "es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Milkstgo</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter&display=swap">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gray-300 black:bg_gray300">
+<header>
+    <nav class="bg-white border-gray-200 bg-indigo-950 dark:bg-indigo-950">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
+            <a href="/" class="flex items-center">
+                <img src="logo.png" class="h-11 mr-3 my-0" alt="MilkStgo Logo"/>
+            </a>
+            <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-violet-950 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-violet-950 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+                <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+            </button>
+            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-indigo-950 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-indigo-950 md:dark:bg-indigo-950 dark:border-gray-700">
+                    <li>
+                        <a href="/listar-proveedores" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Ver Proveedores</a>
+                    </li>
+                    <li>
+                        <a href="/ingresar-proveedor" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Añadir Proveedores</a>
+                    </li>
+                    <li>
+                        <a href="/subir-acopio" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Subir Acopio</a>
+                    </li>
+                    <li>
+                        <a href="/subir-grasas" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Subir Grasas</a>
+                    </li>
+                    <li>
+                        <a href="/crear-planillas" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Calcular la Planilla</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Ver Planilla de pago</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
 
+<main>
+    <div th:align = "center" class="relative overflow-x-auto">
+        <table class="relative mx-auto mt-7 text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="font-inter text-xs text-center text-white bg-indigo-950 dark:bg-indigo-950 dark:text-white">
+            <tr>
+                <th scope="col" class="px-1 py-1">ID</th>
+                <th scope="col" class="px-1 py-1">Quincena</th>
+                <th scope="col" class="px-1 py-1">Codigo</th>
+                <th scope="col" class="px-1 py-1">Nombre</th>
+                <th scope="col" class="px-1 py-1">Total Leche (kg)</th>
+                <th scope="col" class="px-1 py-1">Dias que envio leche</th>
+                <th scope="col" class="px-1 py-1">Promedio Leche (kg)</th>
+                <th scope="col" class="px-1 py-1">Variacion Leche (%)</th>
+                <th scope="col" class="px-1 py-1">Grasas (%)</th>
+                <th scope="col" class="px-1 py-1">Variacion Grasas (%)</th>
+                <th scope="col" class="px-1 py-1">Solidos Totales (%)</th>
+                <th scope="col" class="px-1 py-1">Variacion ST (%)</th>
+                <th scope="col" class="px-1 py-1">Pago Leche ($)</th>
+                <th scope="col" class="px-1 py-1">Pago Grasas ($)</th>
+                <th scope="col" class="px-1 py-1">Pago ST ($)</th>
+                <th scope="col" class="px-1 py-1">Bono Frecuencia ($)</th>
+                <th scope="col" class="px-1 py-1">Dcto x Var. Leche (%)</th>
+                <th scope="col" class="px-1 py-1">Dcto x Var. Grasas (%)</th>
+                <th scope="col" class="px-1 py-1">Dcto x Var. ST (%)</th>
+                <th scope="col" class="px-1 py-1">Pago total ($)</th>
+                <th scope="col" class="px-1 py-1">Retencion (%)</th>
+                <th scope="col" class="px-1 py-1">Pago Final ($)</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="font-inter font-medium text-xs text-center bg-gray-500 dark:bg-gray-500 text-black dark:text-black rounded-bl-xl rounded-br-xl" th:each="planillas:${planillas}">
+                <td class="px-1 py-2" th:text="${planillas.ID}"></td>
+                <td class="px-1 py-2" th:text="${planillas.quincena}"></td>
+                <td class="px-1 py-2" th:text="${planillas.codigoProv}"></td>
+                <td class="px-1 py-2" th:text="${planillas.nombreProv}"></td>
+                <td class="px-1 py-2" th:text="${planillas.totalKlsLeche}"></td>
+                <td class="px-1 py-2" th:text="${planillas.diasEnvioLeche}"></td>
+                <td class="px-1 py-2" th:text="${planillas.promKlsLeche}"></td>
+                <td class="px-1 py-2" th:text="${planillas.variacionLeche}"></td>
+                <td class="px-1 py-2" th:text="${planillas.porcentajeGrasas}"></td>
+                <td class="px-1 py-2" th:text="${planillas.variacionGrasas}"></td>
+                <td class="px-1 py-2" th:text="${planillas.solidosTotales}"></td>
+                <td class="px-1 py-2" th:text="${planillas.variacionST}"></td>
+                <td class="px-1 py-2" th:text="${planillas.pagoLeche}"></td>
+                <td class="px-1 py-2" th:text="${planillas.pagoGrasa}"></td>
+                <td class="px-1 py-2" th:text="${planillas.pagoST}"></td>
+                <td class="px-1 py-2" th:text="${planillas.bonoFrecuencia}"></td>
+                <td class="px-1 py-2" th:text="${planillas.dctoVarLeche}"></td>
+                <td class="px-1 py-2" th:text="${planillas.dctoVarGrasa}"></td>
+                <td class="px-1 py-2" th:text="${planillas.dctoVarST}"></td>
+                <td class="px-1 py-2" th:text="${planillas.pagoTotal}"></td>
+                <td class="px-1 py-2" th:text="${planillas.montoRetencion}"></td>
+                <td class="px-1 py-2" th:text="${planillas.montoFinal}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
 </body>
 </html>

@@ -34,9 +34,12 @@ public class PlanillaPagoService {
             return planillas;
         }
 
-        for (String codigo: codigoProveedor){
-            planillas.add(planillaPagoRepository.save(calcularPlanilla(codigo)));
+        else {
+            for (String codigo: codigoProveedor){
+                planillas.add(planillaPagoRepository.save(calcularPlanilla(codigo)));
+            }
         }
+
         return planillas;
     }
 
@@ -47,12 +50,12 @@ public class PlanillaPagoService {
         ArrayList<PlanillaPagoEntity> quincenasProveedor = traerPlanillaDeProv(codigoProveedor);
 
         ProveedorEntity proveedor = proveedorService.findByCode(codigoProveedor);
-        if (proveedor.getCodigo() == null){
+        if (proveedor == null){
             return null;
         }
 
         SubirGrasasEntity subirGrasasEntity = subirGrasasService.buscarPorProveedor(codigoProveedor);
-        if (subirGrasasEntity.getProveedor() == null){
+        if (subirGrasasEntity == null){
             return null;
         }
 

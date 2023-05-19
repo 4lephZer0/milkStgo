@@ -34,11 +34,4 @@ public class SubirAcopioController {
         subirAcopio.leerArchivo("Acopio.csv");
         return "redirect:/subir-acopio";
     }
-
-    @GetMapping("/acopio-info")
-    public String verDatos(Model model) {
-        ArrayList<SubirAcopioEntity> datos = subirAcopio.verDatos();
-        model.addAttribute("datos", datos);
-        return "acopio-info";
-    }
 }
