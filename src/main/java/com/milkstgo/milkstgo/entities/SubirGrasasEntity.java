@@ -1,6 +1,5 @@
 package com.milkstgo.milkstgo.entities;
 
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,9 +12,10 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Data
 public class SubirGrasasEntity {
+
     @Id
-    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true, nullable = false)
     private Integer ID;
     private String proveedor;
     private Integer grasas;

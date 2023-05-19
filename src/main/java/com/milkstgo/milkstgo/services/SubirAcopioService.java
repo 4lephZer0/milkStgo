@@ -15,19 +15,17 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 @Service
 public class SubirAcopioService {
 
     @Autowired
-    private SubirAcopioRepository dataRepository;
+    private SubirAcopioRepository subirAcopioRepository;
 
     private final Logger logg = LoggerFactory.getLogger(SubirAcopioService.class);
-
-    public ArrayList<SubirAcopioEntity> verDatos(){
-        return (ArrayList<SubirAcopioEntity>) dataRepository.findAll();
-    }
 
     @Generated
     public String guardar(MultipartFile file){
@@ -55,7 +53,7 @@ public class SubirAcopioService {
     public void leerArchivo(String direccion){
         String texto = "";
         BufferedReader bf = null;
-        dataRepository.deleteAll();
+        subirAcopioRepository.deleteAll();
         try{
             bf = new BufferedReader(new FileReader(direccion));
             String temp = "";
@@ -66,7 +64,7 @@ public class SubirAcopioService {
                     count = 0;
                 }
                 else{
-                    guardarDataDB(bfRead.split(";")[0], bfRead.split(";")[1], bfRead.split(";")[2], bfRead.split(";")[3]);
+                    crearAcopio(bfRead.split(";")[0], bfRead.split(";")[1], bfRead.split(";")[2], Integer.parseInt(bfRead.split(";")[3]));
                     temp = temp + "\n" + bfRead;
                 }
             }
@@ -85,19 +83,27 @@ public class SubirAcopioService {
         }
     }
 
-    public void guardarData(SubirAcopioEntity data){
-        dataRepository.save(data);
-    }
+    public SubirAcopioEntity crearAcopio(String fechaStr, String turno, String proveedor, Integer Kgleche){
 
-    public void guardarDataDB(String fecha, String turno, String proveedor, String Kgleche){
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDate fecha = LocalDate.parse(fechaStr, formato);
+
         SubirAcopioEntity nuevoAcopio = new SubirAcopioEntity();
         nuevoAcopio.setFecha(fecha);
         nuevoAcopio.setTurno(turno);
         nuevoAcopio.setProveedor(proveedor);
         nuevoAcopio.setKgleche(Kgleche);
-        guardarData(nuevoAcopio);
+        return subirAcopioRepository.save(nuevoAcopio);
     }
-    public void eliminarData(ArrayList<SubirAcopioEntity> datos){
-        dataRepository.deleteAll(datos);
+
+    public ArrayList<SubirAcopioEntity> verDatos(){
+        return subirAcopioRepository.findAll();
+    }
+
+    public ArrayList<SubirAcopioEntity> findByProveedor(String proveedor) {
+        return subirAcopioRepository.findByProveedor(proveedor);}
+
+    public void eliminarData(){
+        subirAcopioRepository.deleteAll();
     }
 }

@@ -1,5 +1,6 @@
 package com.milkstgo.milkstgo.services;
 
+import com.milkstgo.milkstgo.entities.SubirAcopioEntity;
 import com.milkstgo.milkstgo.entities.SubirGrasasEntity;
 import com.milkstgo.milkstgo.repositories.SubirGrasasRepository;
 import lombok.Generated;
@@ -22,6 +23,7 @@ public class SubirGrasasService {
 
     @Autowired
     private SubirGrasasRepository dataRepository;
+
     private final Logger logg = LoggerFactory.getLogger(SubirGrasasService.class);
 
     public ArrayList<SubirGrasasEntity> verDatos(){
@@ -65,7 +67,7 @@ public class SubirGrasasService {
                     count = 0;
                 }
                 else{
-                    guardarDataDB(bfRead.split(";")[0], Integer.parseInt(bfRead.split(";")[1]), Integer.parseInt(bfRead.split(";")[2]));
+                    crearGrasas(bfRead.split(";")[0], Integer.parseInt(bfRead.split(";")[1]), Integer.parseInt(bfRead.split(";")[2]));
                     temp = temp + "\n" + bfRead;
                 }
             }
@@ -84,18 +86,23 @@ public class SubirGrasasService {
         }
     }
 
-    public void guardarData(SubirGrasasEntity data){
-        dataRepository.save(data);
-    }
-
-    public void guardarDataDB(String proveedor, Integer grasas, Integer solidoTotal){
+    public SubirGrasasEntity crearGrasas(String proveedor, Integer grasas, Integer solidoTotal){
         SubirGrasasEntity nuevaGrasa = new SubirGrasasEntity();
         nuevaGrasa.setProveedor(proveedor);
         nuevaGrasa.setGrasas(grasas);
         nuevaGrasa.setSolidoTotal(solidoTotal);
-        guardarData(nuevaGrasa);
+        return dataRepository.save(nuevaGrasa);
     }
-    public void eliminarData(ArrayList<SubirGrasasEntity> datos){
-        dataRepository.deleteAll(datos);
+
+    public ArrayList<SubirGrasasEntity> verGrasas(){
+        return dataRepository.findAll();
     }
+
+    public SubirGrasasEntity buscarPorProveedor(String codigo){return dataRepository.findByProveedor(codigo);}
+
+    public void eliminarData(){
+        dataRepository.deleteAll();
+    }
+
+
 }

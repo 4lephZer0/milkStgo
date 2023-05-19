@@ -8,7 +8,7 @@ spring:
     show-sql: true
     hibernate:
       dialect: MySQL8Dialect
-      ddl-auto: create
+      ddl-auto: create-drop
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     dbname: milkstgo

@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 @Controller
 @RequestMapping
-
 public class ProveedorController {
 
     @Autowired

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "Acopio")
@@ -13,12 +14,13 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Data
 public class SubirAcopioEntity {
+
     @Id
-    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true, nullable = false)
     private Integer ID;
-    private String fecha;
+    private LocalDate fecha;
     private String turno;
     private String proveedor;
-    private String kgleche;
+    private Integer kgleche;
 }

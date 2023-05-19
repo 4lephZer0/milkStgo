@@ -34,11 +34,4 @@ public class SubirGrasasController {
         subirGrasas.leerArchivo("Grasas.csv");
         return "redirect:/subir-grasas";
     }
-
-    @GetMapping("/grasas-info")
-    public String verDatos(Model model) {
-        ArrayList<SubirGrasasEntity> datos = subirGrasas.verDatos();
-        model.addAttribute("datos", datos);
-        return "grasas-info";
-    }
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ProveedorService {
@@ -13,17 +14,23 @@ public class ProveedorService {
     @Autowired
     ProveedorRepository proveedorRepository;
 
-    public void crearProveedor(String codigo, String nombre, String categoria, String afecto){
+    public ProveedorEntity crearProveedor(String codigo, String nombre, String categoria, String afecto){
 
         ProveedorEntity proveedorEntity = new ProveedorEntity();
         proveedorEntity.setCodigo(codigo);
         proveedorEntity.setNombre(nombre);
         proveedorEntity.setCategoria(categoria);
         proveedorEntity.setAfecto(afecto);
-        proveedorRepository.save(proveedorEntity);
+        return proveedorRepository.save(proveedorEntity);
     }
 
     public ArrayList<ProveedorEntity> traerProveedores(){
         return (ArrayList<ProveedorEntity>) proveedorRepository.findAll();
     }
+
+    public ArrayList<String> obtenerCodProveedores(){
+        return proveedorRepository.findAllCodigo();
+    }
+
+    public ProveedorEntity findByCode(String codigo) {return proveedorRepository.findByCodigo(codigo); }
 }
