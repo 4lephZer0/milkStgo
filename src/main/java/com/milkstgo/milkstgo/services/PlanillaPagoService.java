@@ -50,51 +50,45 @@ public class PlanillaPagoService {
         ArrayList<PlanillaPagoEntity> quincenasProveedor = traerPlanillaDeProv(codigoProveedor);
 
         ProveedorEntity proveedor = proveedorService.findByCode(codigoProveedor);
-        if (proveedor == null){
-            return null;
-        }
-
         SubirGrasasEntity subirGrasasEntity = subirGrasasService.buscarPorProveedor(codigoProveedor);
-        if (subirGrasasEntity == null){
-            return null;
-        }
-
         ArrayList<SubirAcopioEntity> acopios = subirAcopioService.findByProveedor(codigoProveedor);
-        if (acopios.isEmpty()) {
-            return null;
+
+        if ((subirGrasasEntity == null)||(acopios.isEmpty())){
+            return planillaPagoEntity;
         }
 
-        if (quincenasProveedor.size() > 0){
-            quincenaAnt = quincenasProveedor.get(quincenasProveedor.size() - 1);
+        else {
+
+            if (!quincenasProveedor.isEmpty()) {
+                quincenaAnt = quincenasProveedor.get(quincenasProveedor.size() - 1);
+            }
+
+            ArrayList<LocalDate> fechas = stringToFecha(acopios);
+
+            planillaPagoEntity.setQuincena(calcQuincena(fechas));
+            planillaPagoEntity.setCodigoProv(codigoProveedor);
+            planillaPagoEntity.setNombreProv(proveedor.getNombre());
+            planillaPagoEntity.setTotalKlsLeche(totalKlsLeche(acopios));
+            planillaPagoEntity.setDiasEnvioLeche(diasEnvio(fechas));
+            planillaPagoEntity.setPromKlsLeche(promedioKlsLeche(acopios));
+            planillaPagoEntity.setVariacionLeche(variacionLeche(planillaPagoEntity.getTotalKlsLeche(), quincenaAnt));
+            planillaPagoEntity.setPorcentajeGrasas(subirGrasasEntity.getGrasas());
+            planillaPagoEntity.setVariacionGrasas(variacionGrasas(planillaPagoEntity.getPorcentajeGrasas(), quincenaAnt));
+            planillaPagoEntity.setSolidosTotales(subirGrasasEntity.getSolidoTotal());
+            planillaPagoEntity.setVariacionST(variacionST(planillaPagoEntity.getSolidosTotales(), quincenaAnt));
+            planillaPagoEntity.setPagoLeche(pagoPorLeche(proveedor.getCategoria(), planillaPagoEntity.getTotalKlsLeche()));
+            planillaPagoEntity.setPagoGrasa(pagoPorGrasa(planillaPagoEntity.getPorcentajeGrasas(), planillaPagoEntity.getTotalKlsLeche()));
+            planillaPagoEntity.setPagoST(pagoPorST(planillaPagoEntity.getSolidosTotales(), planillaPagoEntity.getTotalKlsLeche()));
+            planillaPagoEntity.setBonoFrecuencia(bonificacion(turnosAcopio(acopios), planillaPagoEntity));
+            planillaPagoEntity.setDctoVarLeche(descuentoPorLeche(planillaPagoEntity.getVariacionLeche()));
+            planillaPagoEntity.setDctoVarGrasa(descuentoPorGrasa(planillaPagoEntity.getVariacionGrasas()));
+            planillaPagoEntity.setDctoVarST(descuentoPorST(planillaPagoEntity.getVariacionST()));
+            planillaPagoEntity.setPagoTotal(calcPagoTotal(planillaPagoEntity));
+            planillaPagoEntity.setMontoRetencion(calcRetencion(planillaPagoEntity, proveedor));
+            planillaPagoEntity.setMontoFinal(pagoFinal(planillaPagoEntity));
+
+            return planillaPagoEntity;
         }
-
-
-
-        ArrayList<LocalDate> fechas = stringToFecha(acopios);
-
-        planillaPagoEntity.setQuincena(calcQuincena(fechas));
-        planillaPagoEntity.setCodigoProv(codigoProveedor);
-        planillaPagoEntity.setNombreProv(proveedor.getNombre());
-        planillaPagoEntity.setTotalKlsLeche(totalKlsLeche(acopios));
-        planillaPagoEntity.setDiasEnvioLeche(diasEnvio(fechas));
-        planillaPagoEntity.setPromKlsLeche(promedioKlsLeche(acopios));
-        planillaPagoEntity.setVariacionLeche(variacionLeche(planillaPagoEntity.getTotalKlsLeche(), quincenaAnt));
-        planillaPagoEntity.setPorcentajeGrasas(subirGrasasEntity.getGrasas());
-        planillaPagoEntity.setVariacionGrasas(variacionGrasas(planillaPagoEntity.getPorcentajeGrasas(), quincenaAnt));
-        planillaPagoEntity.setSolidosTotales(subirGrasasEntity.getSolidoTotal());
-        planillaPagoEntity.setVariacionST(variacionST(planillaPagoEntity.getSolidosTotales(), quincenaAnt));
-        planillaPagoEntity.setPagoLeche(pagoPorLeche(proveedor.getCategoria(), planillaPagoEntity.getTotalKlsLeche()));
-        planillaPagoEntity.setPagoGrasa(pagoPorGrasa(planillaPagoEntity.getPorcentajeGrasas(), planillaPagoEntity.getTotalKlsLeche()));
-        planillaPagoEntity.setPagoST(pagoPorST(planillaPagoEntity.getSolidosTotales(), planillaPagoEntity.getTotalKlsLeche()));
-        planillaPagoEntity.setBonoFrecuencia(bonificacion(turnosAcopio(acopios), planillaPagoEntity));
-        planillaPagoEntity.setDctoVarLeche(descuentoPorLeche(planillaPagoEntity.getVariacionLeche()));
-        planillaPagoEntity.setDctoVarGrasa(descuentoPorGrasa(planillaPagoEntity.getVariacionGrasas()));
-        planillaPagoEntity.setDctoVarST(descuentoPorST(planillaPagoEntity.getVariacionST()));
-        planillaPagoEntity.setPagoTotal(calcPagoTotal(planillaPagoEntity));
-        planillaPagoEntity.setMontoRetencion(calcRetencion(planillaPagoEntity, proveedor));
-        planillaPagoEntity.setMontoFinal(pagoFinal(planillaPagoEntity));
-
-        return planillaPagoEntity;
     }
 
     public ArrayList<PlanillaPagoEntity> traerPlanillaDeProv(String codigoProveedor){
@@ -144,7 +138,7 @@ public class PlanillaPagoService {
             return 0;
         }
         else{
-            return (Math.round((double) ((totalKls - quincenaAnt.getTotalKlsLeche()) / quincenaAnt.getTotalKlsLeche()) * 10000))/100.0;
+            return (Math.round( ((double)(totalKls - quincenaAnt.getTotalKlsLeche()) / (double) quincenaAnt.getTotalKlsLeche()) * 10000))/100.0;
         }
 
     }
@@ -185,19 +179,24 @@ public class PlanillaPagoService {
             case "D":
                 pago = totalKlsLeche * 250;
                 break;
+            default:
+                return pago;
         }
         return pago;
     }
 
     public int pagoPorGrasa(int grasas, int totalKlsLeche) {
         int pago = 0;
-        if (grasas >= 0 && grasas <= 20) {
+        if (grasas < 0){
+            return pago;
+        }
+        else if (grasas <= 20) {
             pago = totalKlsLeche * 30;
         }
-        else if (grasas >= 21 && grasas <= 45) {
+        else if (grasas <= 45) {
             pago = totalKlsLeche * 80;
         }
-        else if (grasas >= 46) {
+        else{
             pago = totalKlsLeche * 120;
         }
         return pago;
@@ -206,16 +205,20 @@ public class PlanillaPagoService {
     public int pagoPorST(int solidosTotales, int totalKlsLeche) {
 
         int pago = 0;
-        if (solidosTotales >= 0 && solidosTotales <= 7) {
+
+        if (solidosTotales < 0){
+            return pago;
+        }
+        else if (solidosTotales <= 7) {
             pago = totalKlsLeche * -130;
         }
-        else if (solidosTotales >= 8 && solidosTotales <= 18) {
+        else if (solidosTotales <= 18) {
             pago = totalKlsLeche * -90;
         }
-        else if (solidosTotales >= 19 && solidosTotales <= 35) {
+        else if (solidosTotales <= 35) {
             pago = totalKlsLeche * 95;
         }
-        else if (solidosTotales >= 36) {
+        else{
             pago = totalKlsLeche * 150;
         }
         return pago;
@@ -250,6 +253,7 @@ public class PlanillaPagoService {
 
     public int descuentoPorLeche(double varLeche) {
         int dcto = 0;
+
         if (varLeche <= -9 && varLeche >= -25) {
             dcto = 7;
         }
@@ -334,4 +338,6 @@ public class PlanillaPagoService {
     public ArrayList<PlanillaPagoEntity> traerPlanilla(){
         return planillaPagoRepository.findAll();
     }
+
+    public void borrarPlanillas(){planillaPagoRepository.deleteAll();}
 }

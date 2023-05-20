@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
-
 @Service
 public class ProveedorService {
 
@@ -33,4 +31,6 @@ public class ProveedorService {
     }
 
     public ProveedorEntity findByCode(String codigo) {return proveedorRepository.findByCodigo(codigo); }
+
+    public void borrarProveedores(){proveedorRepository.deleteAll();}
 }

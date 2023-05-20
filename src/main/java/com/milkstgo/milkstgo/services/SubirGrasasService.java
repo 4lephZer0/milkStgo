@@ -25,10 +25,6 @@ public class SubirGrasasService {
 
     private final Logger logg = LoggerFactory.getLogger(SubirGrasasService.class);
 
-    public ArrayList<SubirGrasasEntity> verDatos(){
-        return (ArrayList<SubirGrasasEntity>) dataRepository.findAll();
-    }
-
     @Generated
     public String guardar(MultipartFile file){
         String filename = file.getOriginalFilename();

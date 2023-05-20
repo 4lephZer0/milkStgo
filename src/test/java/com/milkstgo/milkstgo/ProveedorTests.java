@@ -1,6 +1,7 @@
 package com.milkstgo.milkstgo;
 
 import com.milkstgo.milkstgo.entities.ProveedorEntity;
+import com.milkstgo.milkstgo.entities.SubirAcopioEntity;
 import com.milkstgo.milkstgo.services.ProveedorService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,5 +66,14 @@ public class ProveedorTests {
         ProveedorEntity proveedorPrueba = proveedorService.crearProveedor("01004", "Juan", "D", "Si");
         ProveedorEntity proveedor = proveedorService.findByCode("01004");
         assertEquals(proveedorPrueba, proveedor);
+    }
+
+    @Test
+    void test1BorrarProveedores(){
+
+        proveedorService.crearProveedor("01001","Pepe","B", "Si");
+        proveedorService.borrarProveedores();
+        ArrayList<ProveedorEntity> proveedores = proveedorService.traerProveedores();
+        assertTrue(proveedores.isEmpty());
     }
 }

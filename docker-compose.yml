@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  mysql-db:
+    image: mysql
+    restart: always
+    volumes:
+      - ./data/db:/var/lib/mysql
+    environment:
+      DB_CONNECTION: mysql
+      DB_HOST: mysql
+      MYSQL_ROOT_PASSWORD: Holahola44#
+      MYSQL_DATABASE: default
+    ports:
+      - 33060:3306
+  app:
+    container_name: milkstgo
+    image: alephzer0/milkstgo
+    ports:
+      - "8090:8090"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/root?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=Holahola44#
+    deploy:
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - mysql-db
