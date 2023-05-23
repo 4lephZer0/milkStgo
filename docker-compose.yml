@@ -28,7 +28,7 @@ services:
     ports:
       - "8091:8090"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/root?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/default?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=Holahola44#
     deploy:
