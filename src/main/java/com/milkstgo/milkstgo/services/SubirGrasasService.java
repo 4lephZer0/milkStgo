@@ -21,7 +21,7 @@ import java.util.List;
 public class SubirGrasasService {
 
     @Autowired
-    private SubirGrasasRepository dataRepository;
+    private SubirGrasasRepository subirGrasasRepository;
 
     private final Logger logg = LoggerFactory.getLogger(SubirGrasasService.class);
 
@@ -51,7 +51,7 @@ public class SubirGrasasService {
     public void leerArchivo(String direccion){
         String texto = "";
         BufferedReader bf = null;
-        eliminarData();
+        subirGrasasRepository.deleteAll();
         try{
             bf = new BufferedReader(new FileReader(direccion));
             String temp = "";
@@ -87,17 +87,17 @@ public class SubirGrasasService {
         nuevaGrasa.setProveedor(proveedor);
         nuevaGrasa.setGrasas(grasas);
         nuevaGrasa.setSolidoTotal(solidoTotal);
-        return dataRepository.save(nuevaGrasa);
+        return subirGrasasRepository.save(nuevaGrasa);
     }
 
     public List<SubirGrasasEntity> verGrasas(){
-        return dataRepository.findAll();
+        return subirGrasasRepository.findAll();
     }
 
-    public SubirGrasasEntity buscarPorProveedor(String codigo){return dataRepository.findByProveedor(codigo);}
+    public SubirGrasasEntity buscarPorProveedor(String codigo){return subirGrasasRepository.findByProveedor(codigo);}
 
     public void eliminarData(){
-        dataRepository.deleteAll();
+        subirGrasasRepository.deleteAll();
     }
 
 
