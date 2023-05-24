@@ -51,7 +51,7 @@ public class SubirGrasasService {
     public void leerArchivo(String direccion){
         String texto = "";
         BufferedReader bf = null;
-        dataRepository.deleteAll();
+        eliminarData();
         try{
             bf = new BufferedReader(new FileReader(direccion));
             String temp = "";

@@ -49,6 +49,7 @@ public class PlanillaPagoService {
         PlanillaPagoEntity quincenaAnt = new PlanillaPagoEntity();
         List<PlanillaPagoEntity> quincenasProveedor = traerPlanillaDeProv(codigoProveedor);
 
+
         ProveedorEntity proveedor = proveedorService.findByCode(codigoProveedor);
         SubirGrasasEntity subirGrasasEntity = subirGrasasService.buscarPorProveedor(codigoProveedor);
         List<SubirAcopioEntity> acopios = subirAcopioService.findByProveedor(codigoProveedor);

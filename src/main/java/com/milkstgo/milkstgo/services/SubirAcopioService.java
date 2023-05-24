@@ -52,7 +52,7 @@ public class SubirAcopioService {
     @Generated
     public void leerArchivo(String direccion){
         BufferedReader bf = null;
-        subirAcopioRepository.deleteAll();
+        eliminarData();
         try{
             bf = new BufferedReader(new FileReader(direccion));
             String temp = "";

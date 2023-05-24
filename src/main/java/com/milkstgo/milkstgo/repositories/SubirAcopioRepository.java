@@ -7,16 +7,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public interface SubirAcopioRepository extends JpaRepository<SubirAcopioEntity, String> {
 
     @Query(value = "SELECT a FROM SubirAcopioEntity a WHERE a.proveedor = :proveedor")
-    ArrayList<SubirAcopioEntity> findByProveedor(@Param("proveedor") String proveedor);
+    List<SubirAcopioEntity> findByProveedor(@Param("proveedor") String proveedor);
 
     @Query(value = "SELECT a FROM SubirAcopioEntity a")
-    ArrayList<SubirAcopioEntity> findAll();
+    List<SubirAcopioEntity> findAll();
 
     @Modifying
     @Query(value = "DELETE FROM SubirAcopioEntity")
