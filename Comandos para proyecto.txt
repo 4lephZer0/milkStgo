@@ -23,3 +23,6 @@ key para sonarqube: sqp_235811b5c0aa1a6796c4fb273774bb1b05ef26cc
 ejecutable para cobertura: mvn clean verify sonar:sonar -Dsonar.projectKey=milkstgo -Dsonar.host.url=http://localhost:9000 -Dsonar.login=sqp_235811b5c0aa1a6796c4fb273774bb1b05ef26cc
 
 clave jenkins: 4dfb4b7152254c97a0114fddd5fd8570
+
+
+doskey /history | findstr docker <por si acaso>
