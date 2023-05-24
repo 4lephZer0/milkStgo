@@ -18,8 +18,8 @@ bajar contenedores: docker-compose down
 
 SONARQUBE
 
-key para sonarqube: sqp_3a71dbe87653c4cfca1c4f788dd3c50ccd13f896
+key para sonarqube: sqp_235811b5c0aa1a6796c4fb273774bb1b05ef26cc
 
-ejecutable para cobertura: mvn clean verify sonar:sonar -Dsonar.projectKey=milkstgo1 -Dsonar.projectName='milkstgo1' -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_3a71dbe87653c4cfca1c4f788dd3c50ccd13f896
+ejecutable para cobertura: mvn clean verify sonar:sonar -Dsonar.projectKey=milkstgo -Dsonar.host.url=http://localhost:9000 -Dsonar.login=sqp_235811b5c0aa1a6796c4fb273774bb1b05ef26cc
 
-clave jenkins: 7b8a06a404a4404eb8695bcef743726b
+clave jenkins: 4dfb4b7152254c97a0114fddd5fd8570
