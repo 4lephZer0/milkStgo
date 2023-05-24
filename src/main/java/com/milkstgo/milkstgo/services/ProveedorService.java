@@ -5,7 +5,8 @@ import com.milkstgo.milkstgo.repositories.ProveedorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class ProveedorService {
 
@@ -22,11 +23,11 @@ public class ProveedorService {
         return proveedorRepository.save(proveedorEntity);
     }
 
-    public ArrayList<ProveedorEntity> traerProveedores(){
-        return (ArrayList<ProveedorEntity>) proveedorRepository.findAll();
+    public List<ProveedorEntity> traerProveedores(){
+        return proveedorRepository.findAll();
     }
 
-    public ArrayList<String> obtenerCodProveedores(){
+    public List<String> obtenerCodProveedores(){
         return proveedorRepository.findAllCodigo();
     }
 

@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping
@@ -19,7 +19,7 @@ public class ProveedorController {
 
     @GetMapping("/listar-proveedores")
     public String listar(Model model){
-        ArrayList<ProveedorEntity> proveedores = proveedorService.traerProveedores();
+        List<ProveedorEntity> proveedores = proveedorService.traerProveedores();
         model.addAttribute("proveedores", proveedores);
         return "listar-proveedores";
     }

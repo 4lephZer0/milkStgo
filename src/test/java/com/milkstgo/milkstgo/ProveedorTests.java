@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -43,7 +44,7 @@ public class ProveedorTests {
         ProveedorEntity proveedorPrueba2 = proveedorService.crearProveedor("01003", "Lucho", "B", "Si");
         ProveedorEntity proveedorPrueba3 = proveedorService.crearProveedor("01004", "Juan", "C", "No");
         ProveedorEntity proveedorPrueba4 = proveedorService.crearProveedor("01005", "Alex", "D", "Si");
-        ArrayList<ProveedorEntity> proveedores = proveedorService.traerProveedores();
+        List<ProveedorEntity> proveedores = proveedorService.traerProveedores();
 
         assertTrue(proveedores.contains(proveedorPrueba));
         assertTrue(proveedores.contains(proveedorPrueba2));
@@ -55,7 +56,7 @@ public class ProveedorTests {
     void  test1ObtenerCodProveedores(){
 
         ProveedorEntity proveedorPrueba = proveedorService.crearProveedor("01003", "Lucho", "C", "No");
-        ArrayList<String> codigos = proveedorService.obtenerCodProveedores();
+        List<String> codigos = proveedorService.obtenerCodProveedores();
 
         assertTrue(codigos.contains(proveedorPrueba.getCodigo()));
     }
@@ -73,7 +74,7 @@ public class ProveedorTests {
 
         proveedorService.crearProveedor("01001","Pepe","B", "Si");
         proveedorService.borrarProveedores();
-        ArrayList<ProveedorEntity> proveedores = proveedorService.traerProveedores();
+        List<ProveedorEntity> proveedores = proveedorService.traerProveedores();
         assertTrue(proveedores.isEmpty());
     }
 }

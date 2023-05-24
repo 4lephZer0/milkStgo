@@ -14,6 +14,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -263,8 +265,8 @@ public class PlanillaPagoTests {
         acopios.add(subirAcopioEntity14);
         acopios.add(subirAcopioEntity15);
 
-        ArrayList<String> turnosTest = planillaPagoService.turnosAcopio(acopios);
-        ArrayList<String> turnos = new ArrayList<>();
+        List<String> turnosTest = planillaPagoService.turnosAcopio(acopios);
+        List<String> turnos = new ArrayList<>();
 
         turnos.add("M");
         turnos.add("M");
@@ -368,7 +370,7 @@ public class PlanillaPagoTests {
         SubirAcopioEntity subirAcopioEntity14 = subirAcopioService.crearAcopio("2023/05/02", "T", "01001", 40);
         SubirAcopioEntity subirAcopioEntity15 = subirAcopioService.crearAcopio("2023/05/03", "T", "01001", 45);
 
-        ArrayList<SubirAcopioEntity> acopios = new ArrayList<>();
+        List<SubirAcopioEntity> acopios = new ArrayList<>();
         acopios.add(subirAcopioEntity1);
         acopios.add(subirAcopioEntity2);
         acopios.add(subirAcopioEntity3);
@@ -414,7 +416,7 @@ public class PlanillaPagoTests {
         SubirAcopioEntity subirAcopioEntity14 = subirAcopioService.crearAcopio("2023/05/02", "M", "01001", 40);
         SubirAcopioEntity subirAcopioEntity15 = subirAcopioService.crearAcopio("2023/05/03", "M", "01001", 45);
 
-        ArrayList<SubirAcopioEntity> acopios = new ArrayList<>();
+        List<SubirAcopioEntity> acopios = new ArrayList<>();
         acopios.add(subirAcopioEntity1);
         acopios.add(subirAcopioEntity2);
         acopios.add(subirAcopioEntity3);
@@ -453,7 +455,7 @@ public class PlanillaPagoTests {
         SubirAcopioEntity subirAcopioEntity14 = subirAcopioService.crearAcopio("2023/05/02", "T", "01001", 40);
         SubirAcopioEntity subirAcopioEntity15 = subirAcopioService.crearAcopio("2023/05/03", "T", "01001", 45);
 
-        ArrayList<SubirAcopioEntity> acopios = new ArrayList<>();
+        List<SubirAcopioEntity> acopios = new ArrayList<>();
         acopios.add(subirAcopioEntity1);
         acopios.add(subirAcopioEntity2);
         acopios.add(subirAcopioEntity3);
@@ -690,7 +692,7 @@ public class PlanillaPagoTests {
         acopios.add(subirAcopioEntity14);
         acopios.add(subirAcopioEntity15);
 
-        ArrayList<LocalDate> stringToFechaTest = planillaPagoService.stringToFecha(acopios);
+        List<LocalDate> stringToFechaTest = planillaPagoService.stringToFecha(acopios);
 
         assertEquals(fechas, stringToFechaTest);
     }
@@ -752,7 +754,7 @@ public class PlanillaPagoTests {
 
         planillaPagoService.crearPlanillaPago();
 
-        ArrayList<PlanillaPagoEntity> planillaPagoTest = planillaPagoService.traerPlanilla();
+        List<PlanillaPagoEntity> planillaPagoTest = planillaPagoService.traerPlanilla();
 
         LocalDate quincena = LocalDate.of(2023, 5, 1);
         PlanillaPagoEntity planillaPago = new PlanillaPagoEntity(null, quincena, "01001", "Pepe", 50, 1, 50,
@@ -796,7 +798,7 @@ public class PlanillaPagoTests {
         planillaPagoService.crearPlanillaPago();
 
         System.out.println(proveedorService.traerProveedores());
-        ArrayList<PlanillaPagoEntity> planillaPagoTest = planillaPagoService.traerPlanilla();
+        List<PlanillaPagoEntity> planillaPagoTest = planillaPagoService.traerPlanilla();
         PlanillaPagoEntity planillaPago = new PlanillaPagoEntity();
 
         assertEquals(planillaPago.getQuincena(), planillaPagoTest.get(0).getQuincena());
@@ -833,9 +835,9 @@ public class PlanillaPagoTests {
         planillaPagoService.crearPlanillaPago();
 
 
-        ArrayList<PlanillaPagoEntity> planillaPagoTest = planillaPagoService.traerPlanilla();
+        List<PlanillaPagoEntity> planillaPagoTest = planillaPagoService.traerPlanilla();
 
-        ArrayList<PlanillaPagoEntity> planillaVacia = new ArrayList<>();
+        List<PlanillaPagoEntity> planillaVacia = new ArrayList<>();
 
         assertEquals(planillaVacia, planillaPagoTest);
     }
@@ -861,7 +863,7 @@ public class PlanillaPagoTests {
         subirGrasasService.crearGrasas("01001", 20,15);
         planillaPagoService.crearPlanillaPago();
 
-        ArrayList<PlanillaPagoEntity> planillaPagoTest = planillaPagoService.traerPlanilla();
+        List<PlanillaPagoEntity> planillaPagoTest = planillaPagoService.traerPlanilla();
 
         assertEquals(20 , planillaPagoTest.get(1).getVariacionLeche(), 0.0);
         assertEquals(100 , planillaPagoTest.get(1).getVariacionGrasas(), 0.0);
@@ -883,7 +885,7 @@ public class PlanillaPagoTests {
         planillaPagoService.crearPlanillaPago();
 
         System.out.println(proveedorService.traerProveedores());
-        ArrayList<PlanillaPagoEntity> planillaPagoTest = planillaPagoService.traerPlanilla();
+        List<PlanillaPagoEntity> planillaPagoTest = planillaPagoService.traerPlanilla();
         PlanillaPagoEntity planillaPago = new PlanillaPagoEntity();
 
         assertEquals(planillaPago.getQuincena(), planillaPagoTest.get(0).getQuincena());
@@ -923,7 +925,7 @@ public class PlanillaPagoTests {
         planillaPagoService.crearPlanillaPago();
 
         System.out.println(proveedorService.traerProveedores());
-        ArrayList<PlanillaPagoEntity> planillaPagoTest = planillaPagoService.traerPlanilla();
+        List<PlanillaPagoEntity> planillaPagoTest = planillaPagoService.traerPlanilla();
         PlanillaPagoEntity planillaPago = new PlanillaPagoEntity();
 
         assertEquals(planillaPago.getQuincena(), planillaPagoTest.get(0).getQuincena());
@@ -964,7 +966,7 @@ public class PlanillaPagoTests {
         planillaPagoService.crearPlanillaPago();
         planillaPagoService.borrarPlanillas();
 
-        ArrayList<PlanillaPagoEntity> planillaPagoTest = planillaPagoService.traerPlanilla();
+        List<PlanillaPagoEntity> planillaPagoTest = planillaPagoService.traerPlanilla();
 
 
         assertTrue(planillaPagoTest.isEmpty());

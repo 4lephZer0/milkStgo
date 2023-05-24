@@ -5,7 +5,7 @@ import com.milkstgo.milkstgo.services.SubirGrasasService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -48,7 +48,7 @@ public class SubirGrasasTests {
         subirGrasasService.crearGrasas("01002",17,45);
         subirGrasasService.crearGrasas("01003",10,20);
         subirGrasasService.eliminarData();
-        ArrayList<SubirGrasasEntity> grasas = subirGrasasService.verGrasas();
+        List<SubirGrasasEntity> grasas = subirGrasasService.verGrasas();
         assertTrue(grasas.isEmpty());
 
     }

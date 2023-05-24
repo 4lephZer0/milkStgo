@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -43,7 +43,7 @@ public class SubirAcopioTests {
     void  test1VerDatos(){
 
         SubirAcopioEntity subirAcopioEntityPrueba1 = subirAcopioService.crearAcopio("2023/05/01","M","01001", 50);
-        ArrayList<SubirAcopioEntity> proveedores = subirAcopioService.verDatos();
+        List<SubirAcopioEntity> proveedores = subirAcopioService.verDatos();
         assertTrue(proveedores.contains(subirAcopioEntityPrueba1));
     }
 
@@ -55,7 +55,7 @@ public class SubirAcopioTests {
         subirAcopioService.crearAcopio("2023/05/01","M","01001", 50);
         subirAcopioService.crearAcopio("2023/05/01","T","01001", 40);
         subirAcopioService.crearAcopio("2023/05/02","M","01002", 45);
-        ArrayList<SubirAcopioEntity> acopios = subirAcopioService.findByProveedor(proveedor);
+        List<SubirAcopioEntity> acopios = subirAcopioService.findByProveedor(proveedor);
 
         for ( SubirAcopioEntity acopio : acopios){
             assertEquals(acopio.getProveedor(), proveedor);
@@ -70,7 +70,7 @@ public class SubirAcopioTests {
         subirAcopioService.crearAcopio("2023/05/01","T","01001", 40);
         subirAcopioService.crearAcopio("2023/05/02","M","01002", 45);
         subirAcopioService.eliminarData();
-        ArrayList<SubirAcopioEntity> acopios = subirAcopioService.verDatos();
+        List<SubirAcopioEntity> acopios = subirAcopioService.verDatos();
         assertTrue(acopios.isEmpty());
 
     }

@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class SubirGrasasService {
@@ -90,7 +90,7 @@ public class SubirGrasasService {
         return dataRepository.save(nuevaGrasa);
     }
 
-    public ArrayList<SubirGrasasEntity> verGrasas(){
+    public List<SubirGrasasEntity> verGrasas(){
         return dataRepository.findAll();
     }
 

@@ -17,7 +17,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class SubirAcopioService {
@@ -51,7 +51,6 @@ public class SubirAcopioService {
 
     @Generated
     public void leerArchivo(String direccion){
-        String texto = "";
         BufferedReader bf = null;
         subirAcopioRepository.deleteAll();
         try{
@@ -68,7 +67,6 @@ public class SubirAcopioService {
                     temp = temp + "\n" + bfRead;
                 }
             }
-            texto = temp;
             System.out.println("Archivo leido exitosamente");
         }catch(Exception e){
             System.err.println("No se encontro el archivo");
@@ -83,7 +81,7 @@ public class SubirAcopioService {
         }
     }
 
-    public SubirAcopioEntity crearAcopio(String fechaStr, String turno, String proveedor, Integer Kgleche){
+    public SubirAcopioEntity crearAcopio(String fechaStr, String turno, String proveedor, Integer kgLeche){
 
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDate fecha = LocalDate.parse(fechaStr, formato);
@@ -92,15 +90,15 @@ public class SubirAcopioService {
         nuevoAcopio.setFecha(fecha);
         nuevoAcopio.setTurno(turno);
         nuevoAcopio.setProveedor(proveedor);
-        nuevoAcopio.setKgleche(Kgleche);
+        nuevoAcopio.setKgleche(kgLeche);
         return subirAcopioRepository.save(nuevoAcopio);
     }
 
-    public ArrayList<SubirAcopioEntity> verDatos(){
+    public List<SubirAcopioEntity> verDatos(){
         return subirAcopioRepository.findAll();
     }
 
-    public ArrayList<SubirAcopioEntity> findByProveedor(String proveedor) {
+    public List<SubirAcopioEntity> findByProveedor(String proveedor) {
         return subirAcopioRepository.findByProveedor(proveedor);}
 
     public void eliminarData(){

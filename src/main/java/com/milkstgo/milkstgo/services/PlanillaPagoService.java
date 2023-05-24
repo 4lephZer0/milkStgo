@@ -26,9 +26,9 @@ public class PlanillaPagoService {
     @Autowired
     SubirGrasasService subirGrasasService;
 
-    public ArrayList<PlanillaPagoEntity> crearPlanillaPago(){
-        ArrayList<String> codigoProveedor = proveedorService.obtenerCodProveedores();
-        ArrayList<PlanillaPagoEntity> planillas = new ArrayList<>();
+    public List<PlanillaPagoEntity> crearPlanillaPago(){
+        List<String> codigoProveedor = proveedorService.obtenerCodProveedores();
+        List<PlanillaPagoEntity> planillas = new ArrayList<>();
 
         if (codigoProveedor.isEmpty()){
             return planillas;
@@ -47,11 +47,11 @@ public class PlanillaPagoService {
 
         PlanillaPagoEntity planillaPagoEntity = new PlanillaPagoEntity();
         PlanillaPagoEntity quincenaAnt = new PlanillaPagoEntity();
-        ArrayList<PlanillaPagoEntity> quincenasProveedor = traerPlanillaDeProv(codigoProveedor);
+        List<PlanillaPagoEntity> quincenasProveedor = traerPlanillaDeProv(codigoProveedor);
 
         ProveedorEntity proveedor = proveedorService.findByCode(codigoProveedor);
         SubirGrasasEntity subirGrasasEntity = subirGrasasService.buscarPorProveedor(codigoProveedor);
-        ArrayList<SubirAcopioEntity> acopios = subirAcopioService.findByProveedor(codigoProveedor);
+        List<SubirAcopioEntity> acopios = subirAcopioService.findByProveedor(codigoProveedor);
 
         if ((subirGrasasEntity == null)||(acopios.isEmpty())){
             return planillaPagoEntity;
@@ -63,7 +63,7 @@ public class PlanillaPagoService {
                 quincenaAnt = quincenasProveedor.get(quincenasProveedor.size() - 1);
             }
 
-            ArrayList<LocalDate> fechas = stringToFecha(acopios);
+            List<LocalDate> fechas = stringToFecha(acopios);
 
             planillaPagoEntity.setQuincena(calcQuincena(fechas));
             planillaPagoEntity.setCodigoProv(codigoProveedor);
@@ -91,11 +91,11 @@ public class PlanillaPagoService {
         }
     }
 
-    public ArrayList<PlanillaPagoEntity> traerPlanillaDeProv(String codigoProveedor){
+    public List<PlanillaPagoEntity> traerPlanillaDeProv(String codigoProveedor){
         return planillaPagoRepository.findByCodigo(codigoProveedor);
     }
 
-    public LocalDate calcQuincena(ArrayList<LocalDate> fechas) {
+    public LocalDate calcQuincena(List<LocalDate> fechas) {
         int quincena;
         int month;
         int year;
@@ -114,17 +114,17 @@ public class PlanillaPagoService {
         return LocalDate.of(year, month, quincena);
     }
 
-    public double promedioKlsLeche(ArrayList<SubirAcopioEntity> acopios){
+    public double promedioKlsLeche(List<SubirAcopioEntity> acopios){
 
         double prom = 0;
         for(SubirAcopioEntity acopioEntity : acopios){
             prom = prom + acopioEntity.getKgleche();
         }
 
-        return Math.round(prom / (double) acopios.size());
+        return Math.round(prom / acopios.size());
     }
 
-    public int totalKlsLeche(ArrayList<SubirAcopioEntity> acopios) {
+    public int totalKlsLeche(List<SubirAcopioEntity> acopios) {
         int totalKls = 0;
         for (SubirAcopioEntity subirAcopioEntity : acopios) {
             totalKls = totalKls + subirAcopioEntity.getKgleche();
@@ -224,7 +224,7 @@ public class PlanillaPagoService {
         return pago;
     }
 
-    public ArrayList<String> turnosAcopio(ArrayList<SubirAcopioEntity> acopios){
+    public List<String> turnosAcopio(List<SubirAcopioEntity> acopios){
 
         ArrayList<String> turnos = new ArrayList<>();
         for (SubirAcopioEntity acopio : acopios){
@@ -233,7 +233,7 @@ public class PlanillaPagoService {
         return turnos;
     }
 
-    public double bonificacion(ArrayList<String> turnos, PlanillaPagoEntity planillaPagoEntity){
+    public double bonificacion(List<String> turnos, PlanillaPagoEntity planillaPagoEntity){
 
         double bono = 0;
         int manana = Collections.frequency(turnos, "M");
@@ -320,22 +320,22 @@ public class PlanillaPagoService {
         return (planillaPagoEntity.getPagoTotal() - planillaPagoEntity.getMontoRetencion());
     }
 
-    public ArrayList<LocalDate> stringToFecha(ArrayList<SubirAcopioEntity> subirAcopioEntities) {
-        ArrayList<LocalDate> fechas = new ArrayList<>();
+    public List<LocalDate> stringToFecha(List<SubirAcopioEntity> subirAcopioEntities) {
+        List<LocalDate> fechas = new ArrayList<>();
         for (SubirAcopioEntity acopioLecheEntity : subirAcopioEntities) {
             fechas.add(acopioLecheEntity.getFecha());
         }
         return fechas;
     }
 
-    public int diasEnvio(ArrayList<LocalDate> fechas) {
+    public int diasEnvio(List<LocalDate> fechas) {
 
         Set<LocalDate> set = new LinkedHashSet<>(fechas);
-        ArrayList<LocalDate> fechasSinRepetir = new ArrayList<>(set);
+        List<LocalDate> fechasSinRepetir = new ArrayList<>(set);
         return fechasSinRepetir.size();
     }
 
-    public ArrayList<PlanillaPagoEntity> traerPlanilla(){
+    public List<PlanillaPagoEntity> traerPlanilla(){
         return planillaPagoRepository.findAll();
     }
 
